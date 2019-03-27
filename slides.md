@@ -102,7 +102,7 @@ $ cat /etc/hardware-table
 
 * Users
   - Self-managed software environments: users' long-held fantasies of using `apt-get` on the cluster
-    are realized:
+    are realized
     
   - Reproducible workflows
 
