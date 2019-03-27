@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>slides</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://revealjs.com/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://revealjs.com/css/theme/solarized.css" id="theme">
+  <link rel="stylesheet" href="custom.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://revealjs.com/css/print/pdf.css' : 'https://revealjs.com/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://revealjs.com/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="experiences-using-singularity-on-palmetto-cluster" class="slide level2">
+<h2>Experiences using Singularity on Palmetto Cluster</h2>
+<h3 id="ashwin-srinath">Ashwin Srinath</h3>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>About Palmetto Cluster at Clemson University</li>
+<li>Quick introduction to Singularity</li>
+<li>Use cases</li>
+<li>Researcher stories</li>
+<li>Demos:
+<ul>
+<li>Singularity + MPI</li>
+<li>Pulling images from the NVIDIA GPU Cloud and deploying on JupyterHub (RAPIDS)</li>
+<li>Large dataset visualization with Paraview</li>
+</ul></li>
+</ul>
+</section>
+<section id="about-palmetto-cluster" class="slide level2">
+<h2>About Palmetto Cluster</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">$ <span class="fu">cat</span> /etc/hardware-table</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"> <span class="ex">PHASE</span> COUNT  MAKE   MODEL    CHIP(0)                <span class="ex">CORES</span>  RAM(1)     <span class="ex">GPUs</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="ex">1</span>     75    Dell   PE1950   Intel Xeon    E5345       8    12 GB      0</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="ex">2a</span>   158    Dell   PE1950   Intel Xeon    E5410       8    12 GB      0</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="ex">2b</span>    84    Dell   PE1950   Intel Xeon    E5410       8    16 GB      0</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="ex">3</span>    225    Sun    X2200    AMD   Opteron 2356        8    16 GB      0</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="ex">4</span>    326    IBM    DX340    Intel Xeon    E5410       8    16 GB      0</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="ex">5a</span>   320    Sun    X6250    Intel Xeon    L5420       8    32 GB      0</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="ex">5b</span>     9    Sun    X4150    Intel Xeon    E5410       8    32 GB      0</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">  <span class="ex">6</span>     67    HP     DL165    AMD   Opteron 6176       24    48 GB      0</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="ex">7a</span>    42    HP     SL230    Intel Xeon    E5-2665    16    64 GB      0</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">  <span class="ex">7b</span>    12    HP     SL250s   Intel Xeon    E5-2665    16    64 GB      2(3)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">  <span class="ex">8a</span>    71    HP     SL250s   Intel Xeon    E5-2665    16    64 GB      2(4)</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">  <span class="ex">8b</span>    57    HP     SL250s   Intel Xeon    E5-2665    16    64 GB      2(4)</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">  <span class="ex">8c</span>    88    Dell   PEC6220  Intel Xeon    E5-2665    16    64 GB      0</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">  <span class="ex">9</span>     72    HP     SL250s   Intel Xeon    E5-2665    16   128 GB      2(4)</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"> <span class="ex">10</span>     80    HP     SL250s   Intel Xeon    E5-2670v2  20   128 GB      2(4)</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"> <span class="ex">11a</span>    40    HP     SL250s   Intel Xeon    E5-2670v2  20   128 GB      2(6)</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"> <span class="ex">11b</span>     4    HP     SL250s   Intel Xeon    E5-2670v2  20   128 GB      0</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"> <span class="ex">12</span>     30    Lenovo NX360M5  Intel Xeon    E5-2680v3  24   128 GB      2(6)</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22"> <span class="ex">13</span>     24    Dell   C4130    Intel Xeon    E5-2680v3  24   128 GB      2(6)</a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"> <span class="ex">14</span>     12    HP     XL1X0R   Intel Xeon    E5-2680v3  24   128 GB      2(6)</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"> <span class="ex">15</span>     32    Dell   C4130    Intel Xeon    E5-2680v3  24   128 GB      2(6)</a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"> <span class="ex">16</span>     40    Dell   C4130    Intel Xeon    E5-2680v4  28   128 GB      2(9)</a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"> <span class="ex">17</span>     20    Dell   C4130    Intel Xeon    E5-2680v4  28   128 GB      2(9)</a>
+<a class="sourceLine" id="cb1-27" data-line-number="27"> <span class="ex">18a</span>     2    Dell   C4140    Intel Xeon    6148G      40   372 GB      4(10)</a>
+<a class="sourceLine" id="cb1-28" data-line-number="28"> <span class="ex">18b</span>    65    Dell   R740     Intel Xeon    6148G      40   372 GB      2(11)</a>
+<a class="sourceLine" id="cb1-29" data-line-number="29"> <span class="ex">18c</span>    10    Dell   R740     Intel Xeon    6148G      40   748 GB      2(11)</a></code></pre></div>
+</section>
+<section id="the-basic-singularity-workflow" class="slide level2">
+<h2>The basic Singularity workflow</h2>
+<ol type="1">
+<li><p>Build on machine with root access (creates a <strong>single</strong> file <code>application.simg</code>).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1">$ <span class="fu">sudo</span> singularity build application.simg Singularity.recipe </a></code></pre></div></li>
+<li><p>Copy <code>application.simg</code> to another host (e.g., HPC cluster, cloud). No root access required.</p></li>
+<li><p>Run container on second host:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1">$ <span class="ex">singularity</span> exec application.simg /path/to/app</a></code></pre></div></li>
+</ol>
+</section>
+<section id="what-makes-singularity-great-for-hpc" class="slide level2">
+<h2>What makes Singularity great for HPC?</h2>
+<ul>
+<li><p><strong>Single file format</strong> makes it easy to move around and deploy containers</p></li>
+<li>Compatibility with Docker images (no need to have Docker installed), enable you to pull from:
+<ul>
+<li>DockerHub</li>
+<li>Nvidia GPU Cloud (NGC)</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1">$ <span class="ex">singularity</span> pull docker://ubuntu</a></code></pre></div></li>
+<li><p>Native support for GPUs. Just pass <code>--nv</code> to bind GPU drivers from host to container:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1">$ <span class="ex">singularity</span> exec --nv /path/to/application.simg /path/to/app</a></code></pre></div></li>
+<li><p>Native support for MPI</p></li>
+</ul>
+</section>
+<section id="use-cases" class="slide level2">
+<h2>Use cases</h2>
+<ul>
+<li>Administrators:
+<ul>
+<li><p>Provisioning software: has saved us many hours (sometimes days) that would have been spent installing and configuring software and dependencies for user applications</p></li>
+<li><p>Containerized services: (JupyterHub, XdMod) allows us to test user-facing services locally, and deploy on the cluster with ease.</p>
+<p><a href="https://github.com/clemsonciti/xdmod-singularity" class="uri">https://github.com/clemsonciti/xdmod-singularity</a></p></li>
+</ul></li>
+<li>Users
+<ul>
+<li><p>Self-managed software environments: users’ long-held fantasies of using <code>apt-get</code> on the cluster are realized:</p></li>
+<li><p>Reproducible workflows</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="deploying-singularity-modules" class="slide level2">
+<h2>Deploying Singularity: modules</h2>
+<ul>
+<li><p>Modules remain the most-used tool for software management by users.</p></li>
+<li><p>Singularity’s <strong>single file format</strong> makes it very easy to deploy Singularity containers as software modules:</p></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1">$ <span class="ex">module</span> load grass</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">$ <span class="fu">which</span> grass</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="bu">alias</span> grass=<span class="st">&#39;singularity exec \</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">    -B /software:/software</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">    -B /scratch2:/scratch2 \</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="st">    -B /local_scratch:/local_scratch \</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="st">    /software/singularity-images/grass-gis-stable.img /usr/local/bin/grass&#39;</span> </a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="ex">/software/singularity/2.5.2/bin/singularity</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">$ <span class="ex">grass</span> <span class="co"># launches grass - as expected</span></a></code></pre></div>
+</section>
+<section id="deploying-singularity-jupyterhub" class="slide level2">
+<h2>Deploying Singularity: JupyterHub</h2>
+<p><img src="images/singularity-plus-jupyterhub.svg" height=200px /></p>
+<ul>
+<li>Multi-user hub for Notebook Servers</li>
+<li>Preferred way of using the cluster for significant (10-20%) number of users</li>
+<li>Growing number of applications are Python/R based with complex dependencies</li>
+<li>Q: How to deploy Singularity in Jupyter Notebooks?</li>
+</ul>
+</section>
+<section id="deploying-singularity-jupyterhub-1" class="slide level2">
+<h2>Deploying Singularity: JupyterHub</h2>
+<p>Simple change to <code>kernel.json</code>:</p>
+<div id="left">
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"> <span class="dt">&quot;display_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Python 3&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"> <span class="dt">&quot;language&quot;</span><span class="fu">:</span> <span class="st">&quot;python&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"> <span class="dt">&quot;argv&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="st">&quot;/software/anaconda/4.2.0/bin/python&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="st">&quot;-m&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">  <span class="st">&quot;ipykernel&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="st">&quot;-f&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">  <span class="st">&quot;{connection_file}&quot;</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"> <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="fu">}</span></a></code></pre></div>
+</div>
+<div id="right">
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"> <span class="dt">&quot;display_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Python 3&quot;</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"> <span class="st">&quot;language&quot;</span><span class="er">:</span> <span class="st">&quot;python&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"> <span class="dt">&quot;argv&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">   <span class="st">&quot;/path/to/singularity&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">   <span class="st">&quot;exec&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">   <span class="st">&quot;/path/to/image.sif&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">   <span class="st">&quot;/usr/bin/python&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">   <span class="st">&quot;-m&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">   <span class="st">&quot;ipykernel&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">   <span class="st">&quot;-f&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">   <span class="st">&quot;{connection_file}&quot;</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"> <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="fu">}</span></a></code></pre></div>
+</div>
+</section>
+<section id="case-study" class="slide level2">
+<h2>Case study:</h2>
+<p><img src="images/feltus.svg" height=500px /></p>
+</section>
+<section id="case-study-1" class="slide level2">
+<h2>Case study:</h2>
+<p><img src="images/schiller.svg" height=500px /></p>
+</section>
+<section id="demos" class="slide level2">
+<h2>Demos</h2>
+<ol type="1">
+<li>Singularity + MPI</li>
+<li>Pulling images from the NVIDIA GPU Cloud and deploying on JupyterHub (RAPIDS)</li>
+<li>Large dataset visualization with Paraview</li>
+</ol>
+</section>
+<section id="thanks" class="slide level2">
+<h2>Thanks!</h2>
+<p><a href="https://github.com/clemsonciti" class="uri">https://github.com/clemsonciti</a></p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://revealjs.com/lib/js/head.min.js"></script>
+  <script src="https://revealjs.com/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://revealjs.com/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://revealjs.com/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://revealjs.com/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

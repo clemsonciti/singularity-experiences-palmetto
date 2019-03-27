@@ -2,4 +2,3 @@
 *.pickle
 *DS_Store
 *.Makefile.native.pandoc
-*.html

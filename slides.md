@@ -19,13 +19,8 @@
 
 ```bash
 $ cat /etc/hardware-table
-s
+
  PHASE COUNT  MAKE   MODEL    CHIP(0)                CORES  RAM(1)     GPUs
-  0      6    HP     DL580    Intel Xeon    7542       24   505 GB(2)   0
-  0      1    HP     DL980    Intel Xeon    7560       64     2 TB(2)   0
-  0      1    HP     DL560    Intel Xeon    E5-4627v4  40   1.5 TB(2)   0
-  0      1    Dell   R830     Intel Xeon    E5-4627v4  40   1.0 TB(2)   0
-  0      2    HP     DL560    Intel Xeon    6138G      80   1.5 TB(2)   0
   1     75    Dell   PE1950   Intel Xeon    E5345       8    12 GB      0
   2a   158    Dell   PE1950   Intel Xeon    E5410       8    12 GB      0
   2b    84    Dell   PE1950   Intel Xeon    E5410       8    16 GB      0
@@ -57,7 +52,7 @@ s
  
 ## The basic Singularity workflow
 
-1. Build on machine with root access (creates a ***single** file `application.simg`).
+1. Build on machine with root access (creates a **single** file `application.simg`).
 
    ```bash
    $ sudo singularity build application.simg Singularity.recipe 
@@ -85,23 +80,30 @@ s
   $ singularity pull docker://ubuntu
   ```
   
-* Native support for GPUs. Just pass `--nv` to bind GPU drivers from host to container.
+* Native support for GPUs. Just pass `--nv` to bind GPU drivers from host to container:
 
   ```bash
   $ singularity exec --nv /path/to/application.simg /path/to/app
   ```
 
-* Native support for MPI.
+* Native support for MPI
 
 
 ## Use cases
 
 * Administrators:
-  - Provisioning software
-  - Containerized services
+  - Provisioning software: has saved us many hours (sometimes days) that would have been
+    spent installing and configuring software and dependencies for user applications
+    
+  - Containerized services: (JupyterHub, XdMod) allows us to test user-facing services locally,
+    and deploy on the cluster with ease.
+    
+    <https://github.com/clemsonciti/xdmod-singularity>
 
 * Users
-  - Self-managed software environments
+  - Self-managed software environments: users' long-held fantasies of using `apt-get` on the cluster
+    are realized:
+    
   - Reproducible workflows
 
 
@@ -127,12 +129,16 @@ $ grass # launches grass - as expected
 
 ## Deploying Singularity: JupyterHub
 
-<img src="images/singularity-plus-jupyterhub.svg" height=500px />
+<img src="images/singularity-plus-jupyterhub.svg" height=200px />
 
+* Multi-user hub for Notebook Servers
+* Preferred way of using the cluster for significant (10-20%) number of users
+* Growing number of applications are Python/R based with complex dependencies
+* Q: How to deploy Singularity in Jupyter Notebooks?
 
 ## Deploying Singularity: JupyterHub
 
-* Simple change to `kernel.json` enables deploying Singularity in Jupyter Notebook
+Simple change to `kernel.json`:
 
 <div id="left">
 
@@ -181,3 +187,14 @@ $ grass # launches grass - as expected
 ## Case study:
 
 <img src="images/schiller.svg" height=500px />
+
+## Demos
+
+1. Singularity + MPI
+2. Pulling images from the NVIDIA GPU Cloud and deploying on JupyterHub (RAPIDS)
+3. Large dataset visualization with Paraview
+
+
+## Thanks!
+
+<https://github.com/clemsonciti>
