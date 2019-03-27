@@ -1,6 +1,6 @@
-## Experiences using Singularity on Palmetto Cluster
+## Experiences using Singularity on Palmetto Cluster at Clemson University
 
-### Ashwin Srinath
+### Ashwin Srinath, Computational Scientist
 
 
 ## Outline
